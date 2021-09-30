@@ -1,0 +1,21 @@
+:root{
+  --themeColor: var(--bs-purple);
+}
+a{
+  color: var(--themeColor);
+}
+body{
+  background-color: aliceblue;
+}
+#app{
+
+  margin: 5vh auto;
+  max-width: 960px;
+  width: 100%;
+  background-color: #fff;
+
+}
+
+#header{
+  background-color: var(--themeColor);
+}

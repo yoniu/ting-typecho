@@ -1,6 +1,6 @@
 <?php
 /**
- * 这是 Typecho 0.9 系统的一套默认皮肤
+ * Ting主题 (vue2+mdui)
  * 
  * @package Ting 
  * @author Yoniu
@@ -13,10 +13,17 @@
 	$staticResource = new Index();
 ?>
 
-<div id="app" class="shadow-sm">
+<div
+	id="app"
+	class="mdui-theme-accent-pink mdui-theme-primary-indigo mdui-shadow-2"
+	:class="{
+		'mdui-theme-layout-dark': !theme,
+		'mdui-theme-layout-light': theme
+	}"
+>
 	<?php $this->need('components/HeaderBar.php'); ?>
 	<?php while($this->next()): ?>
-        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+        <article class="post mdui-typo" itemscope itemtype="http://schema.org/BlogPosting">
 			<h2 class="post-title" itemprop="name headline"><a itemprop="url" href="<?php $this->permalink() ?>"><?php $this->title() ?></a></h2>
 			<ul class="post-meta">
 				<li itemprop="author" itemscope itemtype="http://schema.org/Person"><?php _e('作者: '); ?><a itemprop="name" href="<?php $this->author->permalink(); ?>" rel="author"><?php $this->author(); ?></a></li>

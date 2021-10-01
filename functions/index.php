@@ -15,10 +15,9 @@ class Index {
         $this->js['vuex'] = 'https://cdn.jsdelivr.net/npm/vuex@3';
         $this->js['axios'] = 'https://cdn.jsdelivr.net/npm/axios';
         $this->js['vue-lazyload'] = 'https://cdn.jsdelivr.net/npm/vue-lazyload';
-        $this->js['bootstrap'] = 'https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js';
-        $this->js['iconfont'] = $this->option->themeUrl.'/assets/js/iconfont.js';
+        $this->js['mdui'] = 'https://cdn.jsdelivr.net/npm/mdui@1.0.1/dist/js/mdui.min.js';
         $this->js['theme'] = $this->option->themeUrl.'/assets/js/theme.js?v'.self::THEME_VERSION;
-        $this->css['bootstrap'] = 'https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css';
+        $this->css['mdui'] = 'https://cdn.jsdelivr.net/npm/mdui@1.0.1/dist/css/mdui.min.css';
         $this->css['theme'] = $this->option->themeUrl.'/style.css?v'.self::THEME_VERSION;
         break;
       case 2:
@@ -26,10 +25,9 @@ class Index {
         $this->js['vuex'] = $this->option->staticResourceUrl.'/assets/js/vuex.min.js';
         $this->js['axios'] = $this->option->staticResourceUrl.'/assets/js/axios.min.js';
         $this->js['vue-lazyload'] = $this->option->staticResourceUrl.'/assets/js/vue-lazyload.js';
-        $this->js['bootstrap'] = $this->option->staticResourceUrl.'/assets/js/bootstrap.bundle.min.js';
-        $this->js['iconfont'] = $this->option->staticResourceUrl.'/assets/js/iconfont.js';
+        $this->js['mdui'] = $this->option->staticResourceUrl.'/assets/js/mdui.min.js';
         $this->js['theme'] = $this->option->staticResourceUrl.'/assets/js/theme.js?v'.self::THEME_VERSION;
-        $this->css['bootstrap'] = $this->option->staticResourceUrl.'/assets/css/bootstrap.min.css';
+        $this->css['mdui'] = $this->option->staticResourceUrl.'/assets/css/mdui.min.css';
         $this->css['theme'] = $this->option->staticResourceUrl.'/style.css?v'.self::THEME_VERSION;
         break;
       default:
@@ -37,10 +35,9 @@ class Index {
         $this->js['vuex'] = $this->option->themeUrl.'/assets/js/vuex.min.js';
         $this->js['axios'] = $this->option->themeUrl.'/assets/js/axios.min.js';
         $this->js['vue-lazyload'] = $this->option->themeUrl.'/assets/js/vue-lazyload.js';
-        $this->js['bootstrap'] = $this->option->themeUrl.'/assets/js/bootstrap.bundle.min.js';
-        $this->js['iconfont'] = $this->option->themeUrl.'/assets/js/iconfont.js';
+        $this->js['mdui'] = $this->option->themeUrl.'/assets/js/mdui.min.js';
         $this->js['theme'] = $this->option->themeUrl.'/assets/js/theme.js?v'.self::THEME_VERSION;
-        $this->css['bootstrap'] = $this->option->themeUrl.'/assets/css/bootstrap.min.css';
+        $this->css['mdui'] = $this->option->themeUrl.'/assets/css/mdui.min.css';
         $this->css['theme'] = $this->option->themeUrl.'/style.css?v'.self::THEME_VERSION;
     }
     if($this->option->musicPlayer){
@@ -52,5 +49,20 @@ class Index {
     }else{
       $this->mp3['song'] = 'none';
     }
+  }
+  //Yoniu：取Gravatar头像
+  static public function getGravatar($email, $s = 40, $d = 'mm', $g = 'g') {
+      if(preg_match('|^[1-9]\d{4,11}@qq\.com$|i',$email)){
+          return "https://q.qlogo.cn/g?b=qq&nk=$email&s=100";
+      }else{
+          $hash = md5($email);
+          $option = Typecho_Widget::widget('Widget_Options');
+          if($option->gravatarURL){
+              $avatar = $option->gravatarURL."/$hash?s=&d=$d&r=$g";
+          }else{
+              $avatar = "https://gravatar.com/avatar/$hash?s=&d=$d&r=$g";
+          }
+          return $avatar;
+      }
   }
 }

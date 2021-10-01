@@ -1,21 +1,41 @@
-:root{
-  --themeColor: var(--bs-purple);
-}
-a{
-  color: var(--themeColor);
-}
 body{
   background-color: aliceblue;
 }
 #app{
-
   margin: 5vh auto;
   max-width: 960px;
   width: 100%;
+}
+.mdui-theme-layout-light{
   background-color: #fff;
-
+}
+.mdui-theme-layout-light .mdui-drawer{
+  background-color: #fff;
+}
+.mdui-theme-layout-dark .mdui-drawer{
+  background-color: #303030;
 }
 
-#header{
-  background-color: var(--themeColor);
+.mdui-appbar{
+  position: sticky;
+  top: 0;
+}
+.mdui-appbar .mdui-typo-title{
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mdui-theme-layout-dark .mdui-list-item-icon.theme-icon{
+  color: moccasin
+}
+
+.mdui-drawer-avatar{
+  width: 100%;
+  padding-top: 100%;
+  background-image: var(--background);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  overflow: hidden;
 }

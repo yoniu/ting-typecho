@@ -65,4 +65,48 @@ class Index {
           return $avatar;
       }
   }
+  //Yoniu：取首页随机文章
+  public function getRandomPost(){
+    $db = Typecho_Db::get();
+    $result = $db->fetchAll($db->select()->from('table.contents')
+        ->where('status = ?','publish')
+        ->where('type = ?', 'post')
+        ->where('created <= unix_timestamp(now())', 'post')
+        ->limit(4)
+        ->order('RAND()')
+    );
+    if($result){
+      foreach($result as $val){
+        $val = Typecho_Widget::widget('Widget_Abstract_Contents')->push($val);
+        $thum = $this->GetThumFromContent(Markdown::convert($val['text']));
+        $permailink = $val['permalink'];
+        $title = $val['title'];
+        $date = date('m-d', $val['created']);
+        echo <<<Yoniu
+          <a class="random-card mdui-col-xs-6 mdui-col-sm-3" style="--background: url($thum);" href="$permailink" title="$title">
+            <div class="random-card-info">
+              <time>$date</time>
+              <span>$title</span>
+            </div>
+          </a>
+Yoniu;
+    }
+  }
+}
+  //Yoniu：取文章首图
+  public function GetThumFromContent($content){
+    $option = Helper::options();
+    preg_match_all("|<img[^>]+src=\"([^>\"]+)\"?[^>]*>|is", $content, $img);
+    if($imgsrc = !empty($img[1])){
+      $imgsrc = $img[1][0];
+    }else{ 
+      preg_match_all("|<img[^>]+src=\"([^>\"]+)\"?[^>]*>|is", $content ,$img);
+      if($imgsrc = !empty($img[1])){
+        $imgsrc = $img[1][0];
+      }else{
+        $imgsrc = $option->defaultCoverImage ? $option->defaultCoverImage : $option->themeUrl . "/assets/image/card.jpg";	
+      }
+    }
+    return $imgsrc;
+  }
 }

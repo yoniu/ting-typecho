@@ -43,22 +43,45 @@
       this.audio.src = this.link;
       this.audio.onerror = function() {
         mdui.alert('音乐加载出错！', '警告');
+      };
+      this.audio.onended = () => {
+        this.play = false;
+        this.audio.currentTime = 0;
       }
     },
+  });
+  Vue.component('search-box', {
+    props: ['box'],
+    template: `
+    <div :id="box + '-collapse'" class="mdui-collapse">
+      <div :id="box" class="mdui-collapse-item">
+        <div class="mdui-collapse-item-body">
+          <slot></slot>
+        </div>
+      </div>
+    </div>
+    `
   })
   const app = new Vue({
     el: '#app',
     data: {
-      theme: true
+      theme: true,
+      inst: undefined
     },
     methods: {
-      changTheme(){
+      changTheme() {
         this.theme = !this.theme
         !this.theme ? localStorage.setItem('theme-light', '0') : localStorage.setItem('theme-light', '1');
+      },
+      toggleSearch() {
+        this.inst.toggle('#search-box');
       }
     },
     beforeMount() {
       this.theme = (0 == + localStorage.getItem('theme-light')) ? false : true;
     },
+    mounted() {
+      this.inst = new mdui.Collapse('#search-box-collapse');
+    }
   });
 })();

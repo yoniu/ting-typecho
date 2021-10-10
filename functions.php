@@ -17,6 +17,9 @@ function themeConfig($form) {
 
     $musicPlayer = new Typecho_Widget_Helper_Form_Element_Text('musicPlayer', NULL, NULL, _t('音乐播放器设置'), _t('格式：歌曲,歌手,音乐文件链接,音乐封面'));
     $form->addInput($musicPlayer);
+
+    $defaultCoverImage = new Typecho_Widget_Helper_Form_Element_Text('defaultCoverImage', NULL, NULL, _t('文章默认占位图'), _t('在这里填入一个图片 URL 地址'));
+    $form->addInput($defaultCoverImage);
     
     $sidebarBlock = new Typecho_Widget_Helper_Form_Element_Checkbox('sidebarBlock', 
     array('ShowRecentPosts' => _t('显示最新文章'),
@@ -25,7 +28,6 @@ function themeConfig($form) {
     'ShowArchive' => _t('显示归档'),
     'ShowOther' => _t('显示其它杂项')),
     array('ShowRecentPosts', 'ShowRecentComments', 'ShowCategory', 'ShowArchive', 'ShowOther'), _t('侧边栏显示'));
-    
     $form->addInput($sidebarBlock->multiMode());
 }
 

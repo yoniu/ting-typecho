@@ -22,6 +22,7 @@
 	}"
 >
 	<?php $this->need('components/HeaderBar.php'); ?>
+	<?php if($this->is('index')) $this->need('components/Ppt.php'); ?>
 	<?php while($this->next()): ?>
         <article class="post mdui-typo" itemscope itemtype="http://schema.org/BlogPosting">
 			<h2 class="post-title" itemprop="name headline"><a itemprop="url" href="<?php $this->permalink() ?>"><?php $this->title() ?></a></h2>

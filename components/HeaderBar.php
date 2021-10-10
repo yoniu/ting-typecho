@@ -18,10 +18,18 @@
       album="<?php echo $staticResource->mp3['album']; ?>"
     ></music-player>
     <?php endif; ?>
-    <a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>
+    <a href="javascript:;" class="mdui-btn mdui-btn-icon" @click="toggleSearch"><i class="mdui-icon material-icons">search</i></a>
     <a href="javascript:;" class="mdui-btn mdui-btn-icon" mdui-drawer="{target: '#right-drawer'}"><i class="mdui-icon material-icons">menu</i></a>
   </div>
 </div>
+<search-box box="search-box">
+  <form id="search" method="post" action="<?php $this->options->siteUrl(); ?>" role="search">
+    <div class="mdui-textfield mdui-textfield-floating-label">
+      <label class="mdui-textfield-label">回车搜索</label>
+      <input class="mdui-textfield-input" type="text" id="s" name="s" />
+    </div>
+  </form>
+</search-box>
 <div id="right-drawer" class="mdui-drawer mdui-drawer-right mdui-drawer-close mdui-shadow-2">
   <div class="mdui-drawer-avatar" style="--background: url(<?php echo $staticResource->getGravatar($this->author->mail,200); ?>);"></div>
   <ul class="mdui-list">
